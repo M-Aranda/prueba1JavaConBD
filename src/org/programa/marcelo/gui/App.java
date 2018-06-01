@@ -47,7 +47,7 @@ public class App extends javax.swing.JFrame {
 
     private Connection conn = null;
     private Conexion con;
-    private Estadisticas est;
+    private Estadistica est;
 
     //query para los insert
     static final String WRITE_OBJECT_SQL = "INSERT INTO matricula(nombre, valor_objeto) VALUES (?, ?)";
@@ -103,13 +103,26 @@ public class App extends javax.swing.JFrame {
         if (rs.next()) {
             max = rs.getInt(1);
         }
-
+        
         return max;
 
     }
+    
+    private void reiniciarArrayDeMatriculas(){
+        
+            matriculas.clear();
+        
+    }
 
     public void cargarDatosEstadistica() {
-
+        reiniciarArrayDeMatriculas();
+        
+        try {
+            rescatarRegistrosDeSQL();
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         recolectarDatosTC();
         est.fijarDatosHard(cantMHard, cantHHard, recH);
         est.fijarDatosJump(cantMJump, cantHJump, recJ);
@@ -179,7 +192,7 @@ public class App extends javax.swing.JFrame {
         recH = 0;
         recJ = 0;
         recT = 0;
-        est = new Estadisticas();
+        est = new Estadistica();
         est.setVisible(false);
 
     }

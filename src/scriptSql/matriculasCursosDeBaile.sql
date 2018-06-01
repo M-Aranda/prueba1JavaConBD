@@ -13,8 +13,9 @@ valor_objeto BLOB
 
 SELECT * FROM matricula;
 
+
 TRUNCATE matricula;
 
-DROP TABLE matricula;
+DROP DATABASE matriculasCursosDeBaile;
 
 
